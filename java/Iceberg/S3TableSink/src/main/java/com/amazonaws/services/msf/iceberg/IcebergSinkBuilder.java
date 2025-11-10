@@ -12,6 +12,7 @@ import org.apache.iceberg.avro.AvroSchemaUtil;
 import org.apache.iceberg.catalog.Catalog;
 import org.apache.iceberg.catalog.TableIdentifier;
 import org.apache.iceberg.flink.*;
+import org.apache.iceberg.io.FileIO;
 import org.apache.iceberg.flink.sink.AvroGenericRecordToRowDataMapper;
 import org.apache.iceberg.flink.sink.FlinkSink;
 import org.apache.iceberg.flink.util.FlinkCompatibilityUtil;

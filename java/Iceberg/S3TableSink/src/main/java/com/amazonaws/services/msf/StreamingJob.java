@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Properties;
 
 public class StreamingJob {
@@ -58,7 +59,7 @@ public class StreamingJob {
         double recordsPerSecond = Double.parseDouble(generatorProperties.getProperty("records.per.sec", "10.0"));
         Preconditions.checkArgument(recordsPerSecond > 0, "Generator records per sec must be > 0");
 
-        LOG.info("Data generator: {} record/sec", recordsPerSecond);
+        LOG.info("Data generator: {} record/sec", Optional.of(recordsPerSecond));
         return new DataGeneratorSource<>(
                 new AvroGenericStockTradeGeneratorFunction(avroSchema),
                 Long.MAX_VALUE,
@@ -98,6 +99,7 @@ public class StreamingJob {
 
         // Flink Sink Builder
         FlinkSink.Builder icebergSinkBuilder = IcebergSinkBuilder.createBuilder(icebergProperties, genericRecordDataStream, avroSchema);
+
         // Sink to Iceberg Table
         icebergSinkBuilder.append();
 

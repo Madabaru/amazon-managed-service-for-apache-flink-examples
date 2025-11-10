@@ -2,7 +2,7 @@
 
 * Flink version: 1.19.0
 * Flink API: DataStream API
-* Iceberg 1.8.1
+* Iceberg 1.9.1
 * Language: Java (11)
 * Flink connectors: [DataGen](https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/connectors/datastream/datagen/) 
    and [Iceberg](https://iceberg.apache.org/docs/latest/flink/)
@@ -10,9 +10,7 @@
 This example demonstrate how to use
 [Flink Iceberg Sink Connector](https://iceberg.apache.org/docs/latest/flink-writes/) with S3 Tables.
 
-For simplicity, the application generates synthetic data, random stock prices, internally. 
-Data is generated as AVRO Generic Record, simulating a real source, for example a Kafka Source, that receives records 
-serialized with AVRO.
+For simplicity, the application generates synthetic data, random stock prices, internally. Data is generated as AVRO Generic Record, simulating a real source, e.g. a Kafka Source, that receives records serialized with AVRO.
 
 ### Prerequisites
 
@@ -49,8 +47,7 @@ The application must have IAM permissions to:
 
 ### Runtime configuration
 
-When running on Amazon Managed Service for Apache Flink the runtime configuration is read from Runtime Properties.
-
+When running on Amazon Managed Service for Apache Flink the runtime configuration is read from runtime properties.
 When running locally, the configuration is read from the
 [resources/flink-application-properties-dev.json](./src/main/resources/flink-application-properties-dev.json) file.
 
@@ -68,10 +65,7 @@ Runtime parameters:
 
 ### Checkpoints
 
-Checkpointing must be enabled. Iceberg commits writes on checkpoint.
-
-When running locally, the application enables checkpoints programmatically, every 10 seconds.
-When deployed to Managed Service for Apache Flink, checkpointing is controlled by the application configuration.
+Checkpointing must be enabled. Iceberg commits writes on checkpoint. When running locally, the application enables checkpoints programmatically, every 10 seconds.When deployed to Managed Service for Apache Flink, checkpointing is controlled by the application configuration.
 
 
 ### Known limitations
@@ -83,9 +77,7 @@ At the moment there are current limitations concerning Flink Iceberg integration
 
 ### Schema and schema evolution
 
-The application must "know" the AVRO schema on start. 
-The schema cannot be dynamically inferred based on the incoming records, for example using a schema registry. 
-This is due to a limitation of the Flink Iceberg integration, that requires knowing the table schema upfront.
+The application must "know" the AVRO schema on start. The schema cannot be dynamically inferred based on the incoming records, for example using a schema registry. This is due to a limitation of the Flink Iceberg integration, that requires knowing the table schema upfront.
 
 This implementation does support schema evolution in the incoming data, as long as new schema versions are FORWARD compatible.
 Schema changes are not propagated to Iceberg. 
