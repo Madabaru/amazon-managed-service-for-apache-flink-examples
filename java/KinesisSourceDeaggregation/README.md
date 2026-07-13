@@ -1,8 +1,8 @@
 ## KinesisStreamsSource de-aggregation
 
-* Flink version: 1.20
+* Flink version: 2.2
 * Flink API: DataStream API
-* Language: Java (11)
+* Language: Java (17)
 * Flink connectors: Kinesis Source and Sink
 
 This example demonstrates how to consume records published using KPL aggregation using `KinesisStreamsSource`.

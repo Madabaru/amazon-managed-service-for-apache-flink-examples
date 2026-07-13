@@ -12,7 +12,7 @@ import org.apache.flink.connector.kinesis.source.KinesisStreamsSource;
 import org.apache.flink.connector.kinesis.source.serialization.KinesisDeserializationSchema;
 import org.apache.flink.formats.json.JsonDeserializationSchema;
 import org.apache.flink.formats.json.JsonSerializationSchema;
-import org.apache.flink.shaded.guava31.com.google.common.collect.Maps;
+import org.apache.flink.shaded.guava33.com.google.common.collect.Maps;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.LocalStreamEnvironment;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;

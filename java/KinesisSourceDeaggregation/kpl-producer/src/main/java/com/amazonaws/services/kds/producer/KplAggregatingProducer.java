@@ -15,6 +15,7 @@ import java.nio.ByteBuffer;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -68,10 +69,10 @@ public class KplAggregatingProducer {
         try {
             CommandLine cmd = parser.parse(options, args);
             String streamNameValue = cmd.getOptionValue("streamName", DEFAULT_STREAM_NAME);
-            String streamRegionValue = cmd.getOptionValue("region", DEFAULT_STREAM_REGION);
+            String streamRegionValue = cmd.getOptionValue("streamRegion", DEFAULT_STREAM_REGION);
             long sleepTimeBetweenRecordsMillis = Long.parseLong(cmd.getOptionValue("sleep", String.valueOf(DEFAULT_SLEEP_TIME_BETWEEN_RECORDS)));
 
-            LOG.info("StreamName: {}, region: {}", streamNameValue, streamNameValue);
+            LOG.info("StreamName: {}, region: {}", streamNameValue, streamRegionValue);
             LOG.info("SleepTimeBetweenRecords: {} ms", sleepTimeBetweenRecordsMillis);
 
             KplAggregatingProducer instance = new KplAggregatingProducer(streamNameValue, streamRegionValue, sleepTimeBetweenRecordsMillis);
@@ -140,7 +141,10 @@ public class KplAggregatingProducer {
     private void sendStockPriceToKinesis(StockPrice stockPrice, String streamName, KinesisProducer producer,
                                          ExecutorService callbackThreadPool) {
         try {
+            // Use Locale.US so the decimal separator is always '.' and the payload is valid JSON,
+            // regardless of the default locale of the machine running the producer.
             String jsonPayload = String.format(
+                    Locale.US,
                     "{\"event_time\": \"%s\", \"ticker\": \"%s\", \"price\": %.2f}",
                     stockPrice.getEventTime(),
                     stockPrice.getTicker(),
