@@ -71,11 +71,6 @@ Example applications in Java, Python, Scala and SQL for Amazon Managed Service f
 - [**Local Development on Apple Silicon**](./python/LocalDevelopmentOnAppleSilicon) - Setup guide for local development of Flink 1.15 on Apple Silicon Macs (not required with Flink 1.18 or later)
 
 
-### Scala Examples
-
-#### Getting Started
-- [**Getting Started - DataStream API**](./scala/GettingStarted) - Skeleton project for a basic Flink Scala application using DataStream API
-
 ### Infrastructure & Operations
 
 - [**Auto Scaling**](./infrastructure/AutoScaling) - Custom autoscaler for Amazon Managed Service for Apache Flink
