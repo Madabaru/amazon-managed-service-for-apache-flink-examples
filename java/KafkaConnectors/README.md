@@ -1,8 +1,8 @@
 ## Flink Kafka Source & Sink Examples
 
-* Flink version: 1.20
+* Flink version: 2.2
 * Flink API: DataStream API
-* Language: Java (11)
+* Language: Java (17)
 
 
 This example demonstrate how to use
